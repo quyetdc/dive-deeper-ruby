@@ -170,7 +170,7 @@ class Tutorial < TestingFramework
   def test_count_element
     array = [2,2,2,3]
 
-    assert_equal(3, array.count, "Given an array return the count of even numbers")
+    assert_equal(3, array.count { |e| e.even? }, "Given an array return the count of even numbers")
     # assert_equal(3, array.size, "Given an array return the count of even numbers")
     # assert_equal(3, array.length, "Given an array return the count of even numbers")
   end
@@ -192,17 +192,17 @@ class Tutorial < TestingFramework
   end
 
   def test_class_method
-    assert_equal({}, REPLACE_ME, "Use the config method from the given Rails class")
+    assert_equal({}, Rails.config, "Use the config method from the given Rails class")
   end
   # Hint: If you have trouble with this review instance method vs class method
 
   def test_parent_class
-    assert_equal(BasicObject, REPLACE_ME.superclass, "Find out what class in Ruby has BasicObject as a direct superclass")
+    assert_equal(BasicObject, Object.superclass, "Find out what class in Ruby has BasicObject as a direct superclass")
   end
   # Hint: Review the Ruby object model
 
   def test_block
-    block = ->(x) { REPLACE_ME * 2 }
+    block = ->(x) { x * 2 }
 
     assert_equal(100, block.call(50), "Make the block return the expected value")
   end
@@ -214,7 +214,7 @@ class Tutorial < TestingFramework
   end
 
   def test_yield
-    assert_equal("string", method_with_block { REPLACE_ME }, "Call the method & have it return the expected value")
+    assert_equal("string", method_with_block { "string" }, "Call the method & have it return the expected value")
   end
 
   module Methods
@@ -224,7 +224,7 @@ class Tutorial < TestingFramework
   end
 
   class Foo
-    REPLACE_ME
+    prepend Methods
 
     def value
     end
@@ -235,7 +235,7 @@ class Tutorial < TestingFramework
   end
 
   def error
-    REPLACE_ME
+    Foo.new.unreal_method
   rescue => e
     e.class
   end
