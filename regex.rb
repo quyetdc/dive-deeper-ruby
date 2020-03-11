@@ -49,7 +49,3 @@ p "abc.123".match?(/(\w)(?=\d)/)
 "this is some string".scan(/\w+/)
 # => ["this", "is", "some", "string"]
 
-str.gsub(/\w+/, &:capitalize) #Example: Capitalize all words in a string
-
-"camelCasingTestFooBar".split(/(?=[A-Z])/) #Example: Split a camelCasing string
-
