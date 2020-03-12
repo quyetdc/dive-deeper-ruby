@@ -49,3 +49,38 @@ regex=/\A(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]{6,}\z/
 # (?=.*[A-Z]) => look ahead: means any char followed by a upcase character => look for a upcase char
 # (?=.*[0-9]) => look ahead: means any char followed by a number => look for a number
 # [a-zA-Z0-9]{6,} => main regex: at least 6 chars of a-zA-Z0-9 (alphanumeric)
+#
+
+
+#
+# Write a regex to validate a 24 hours time string. See examples to figure out what you should check for:
+#
+# Accepted: 01:00 - 1:00
+# Not accepted:
+#       24:00
+# You should check for correct length and no spaces.
+
+def validate_time(time)
+  time.match? /\A[0-23]+:[0-5]+[0-9]+\z/
+end
+
+# Your task is to write a regular expression that matches positive decimal integers divisible by 4.
+# Negative numbers should be rejected, but leading zeroes are permitted.
+$div_by_4 = /\A[048]$|\d*[02468][048]$|\d*[13579][26]$/
+
+# [048]$ => 1 digit, 0 or 4 or 8
+# | or
+# \d*[02468][048]$ => any digits, ended with two digits ordered as [02468][048]
+# \d*[13579][26]$ => any digits, ended with two digits ordered as [13579][26]
+#
+
+# Remove HTML tags and return string without: 1) <tag> and </tag>
+# 2) <tag/>
+#   3) <tag />
+# 4) html tags with attributes.
+# Don't trim space, tab etc.
+#
+# You have to use regexp.
+
+reg = /<[^>]+>/
+# Test.assert_equals("<div>test</div>".gsub(reg, ""), "test")
