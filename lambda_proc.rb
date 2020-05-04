@@ -60,3 +60,14 @@ p call_lambda
 # Before lambda
 # After lambda
 # nil
+
+
+# Proc closure
+def call_proc(my_proc) 
+	count = 500 
+	my_proc.call
+end
+
+count = 1
+my_proc = Proc.new { puts "Closure: #{count}" }
+call_proc(my_proc)
