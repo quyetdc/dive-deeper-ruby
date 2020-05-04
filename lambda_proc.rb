@@ -71,3 +71,8 @@ end
 count = 1
 my_proc = Proc.new { puts "Closure: #{count}" }
 call_proc(my_proc)
+
+
+%w(foo bar).map(&:upcase)
+# &:upcase means
+# Proc.new { |word| word.upcase }
