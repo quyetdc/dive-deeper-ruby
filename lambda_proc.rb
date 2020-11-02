@@ -71,8 +71,13 @@ end
 count = 1
 my_proc = Proc.new { puts "Closure: #{count}" }
 call_proc(my_proc)
+# => Pring 1
+# => because Proc will care about the context where it's defined
+# 	 that is count outside the method
 
 
 %w(foo bar).map(&:upcase)
+# to_proc:
+# Return a Proc object which responds to the given method name.
 # &:upcase means
 # Proc.new { |word| word.upcase }
