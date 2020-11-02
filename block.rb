@@ -35,7 +35,7 @@ yield_multi_params { |number1, number2| puts "#{number1} times #{number2} equals
 
 
 def explicit_block(&block)
-	block.call # same as field
+	block.call # same as yield
 end
 
 explicit_block { puts 'Explicit block called' }
