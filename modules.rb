@@ -38,6 +38,8 @@ Store.add_product
 
  
 module Formatter 
+	# This defines all the methods in the module as class-level methods, 
+	# which lets you call the methods directly from the module
 	extend self
 	def wrap_with(symbol, str) 
 		"#{symbol * 4} #{str} #{symbol * 4}"
