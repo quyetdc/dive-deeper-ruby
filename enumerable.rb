@@ -19,3 +19,61 @@ numbers = [1, 2, 3, 4, 5]
 p numbers.reject(&:odd?) # [2, 4]
 p numbers.partition(&:even?) # [[2, 4], [1, 3, 5]]
 
+
+
+# Implement EACH
+class Numbers
+	def initialize *numbers
+		@numbers = *numbers
+	end
+
+	def size
+		@numbers.size
+	end
+
+	def each
+		index = 0
+		while index < size
+			yield @numbers[index]
+			index += 1
+		end
+	end
+end
+
+numbers = Numbers.new 1, 2, 3
+numbers.each { |number|  puts "#{number}" }
+
+# Implement MAP
+Book = Struct.new(:title, :author, :pages)
+
+class Library
+	attr_accessor :books
+
+	def initialize
+		@books = [
+			Book.new('Eloquent Ruby', 'Russ Olsen', 448),
+			Book.new('Confident Ruby', 'Avdi Grimm', 296)
+		]
+	end
+
+	# loop
+	# do sth with each element
+	# return array of results
+	def map
+		results = []
+		@books.each do |book|
+			results << yield(book)
+		end
+
+		results
+	end
+end
+
+p "MAP"
+library = Library.new
+p library.map(&:title)
+
+# If you take just one thing out of this chapter, remember the top 3 Enumerable methods:
+	# map (TRANSFORM) 
+	# select (FILTER) 
+	# inject (COMBINE)
