@@ -73,3 +73,21 @@ class Animal
 end
 
 p Animal.method(:speak).source_location
+
+
+# Dynamic Constant
+
+class DynamicColors
+	def self.define_constants
+		colors =  {
+								"red": "#111",
+								"green": "#222",
+								"yellow": "#333"
+							}
+
+		colors.each { |color, code| const_set(color.upcase, code)}
+	end
+end
+
+DynamicColors.define_constants
+p DynamicColors::GREEN # => "#222"
