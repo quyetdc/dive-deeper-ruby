@@ -91,3 +91,74 @@ end
 
 DynamicColors.define_constants
 p DynamicColors::GREEN # => "#222"
+
+
+# METACLASS
+
+# Every object in Ruby has its own metaclass.
+example = "I'm a string object"
+
+def example.something 
+	# singleton method which available only to that single instance
+  self.upcase
+end
+
+p example.something
+# I'M A STRING OBJECT
+
+
+
+# Similarly we can use: define_method & define_singleton_method
+# => create code that is DRY by avoiding repetitions
+
+class Developer
+  ["frontend", "backend"].each do |method|
+    define_method "coding_#{method}" do
+      p "writing " + method.to_s
+    end
+  end
+end
+developer = Developer.new
+
+developer.coding_frontend
+# "writing frontend"
+
+developer.coding_backend
+# "writing backend"
+
+
+class DryDeveloper
+
+  def method_missing method, *args, &block
+    return super method, *args, &block unless method.to_s =~ /^coding_\w+/
+    self.class.send(:define_method, method) do
+      p "writing " + method.to_s.gsub(/^coding_/, '').to_s
+    end
+    self.send method, *args, &block
+  end
+
+end
+
+developer = DryDeveloper.new
+
+developer.coding_frontend
+developer.coding_backend
+developer.coding_debug
+
+
+# HOOK
+module Products
+	def self.included(base)
+		puts "> Products included into #{base}!" 
+	end
+end
+
+class Shop 
+	include Products 
+	# => Products included into Shop!
+end
+
+class Cart
+	include Products
+	# => Products included into Cart!
+end
