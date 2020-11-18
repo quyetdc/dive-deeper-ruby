@@ -28,3 +28,48 @@ rescue NoMethodError => e
 end
 
 p.send(:private_method) # This text is inside a private method
+
+
+# SELF
+	# The special variable self holds a reference to the current object.
+
+# Top-level context, self is just an instance of Object
+p "********* ------ *********"
+puts self # => main
+
+class FindingSelf 
+  # self is the class 
+  p '+++'
+	puts self # => FindingSelf
+
+	def show_self
+		# self is the object instance
+		p '+++'
+		puts self # => <FindingSelf:0x00007fe085835320>
+	end 
+end
+
+fs = FindingSelf.new
+fs.show_self
+
+# respond_to? 
+ 
+class A 
+	def say
+  end
+end
+
+class B < A 
+end
+
+p B.new.respond_to?(:say) # => true
+# to ask an object if it can respond to a certain method call.
+
+
+# The Method Method (not a typo)
+class Animal 
+	def self.speak 
+	end
+end
+
+p Animal.method(:speak).source_location
